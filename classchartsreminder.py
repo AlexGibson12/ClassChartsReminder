@@ -5,7 +5,10 @@ import arrow
 import datetime
 import posixpath
 import sys
+import subprocess
+import os
 from plyer import notification
+
 classcharts_home_url = "https://www.classcharts.com/"
 classcharts_api_url = posixpath.join(classcharts_home_url, "apiv2student")
 classcharts_login_url = posixpath.join(classcharts_api_url, "login")
@@ -32,15 +35,14 @@ def notify(code,dob):
             lesson["start_time"], '%Y-%m-%dT%H:%M:%S+00:00')
             if now.hour == start.hour and now.minute == start.minute:
                 notification.notify( 
-                title = "ClassCharts", 
-                message=f'You have {lesson["subject_name"]} now', 
+                title = "ClassCharts Reminder",
+                app_icon = os.path.abspath("classcharts.ico"),
+                message=f'You have {lesson["subject_name"]} now.', 
                 timeout=5) 
         time.sleep(60)
 if len(sys.argv)<4:
     notify(sys.argv[1],sys.argv[2])
 else:
     print("Usage: python3 classchartsreminder.py <yourcode> <dd/mm/yyyy>")
-
-
 
       
