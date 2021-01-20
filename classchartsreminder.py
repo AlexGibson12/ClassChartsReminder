@@ -3,6 +3,7 @@ import json
 import time
 import arrow
 import datetime
+import posixpath
 from plyer import notification
 classcharts_home_url = "https://www.classcharts.com/"
 classcharts_api_url = posixpath.join(classcharts_home_url, "apiv2student")
