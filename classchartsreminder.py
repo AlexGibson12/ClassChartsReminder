@@ -18,16 +18,12 @@ while True:
         headers=headers,
         params=params
      ).text
-    subjects = [(
-        datetime.datetime.strptime(i["start_time"], '%Y-%m-%dT%H:%M:%S+00:00'),
-        i["subject_name"])
-        for i in json.loads(response)["data"]]
-
-    for i in subjects:
+    for lesson in json.loads(response)["data"]:
         now = datetime.datetime.now()
-        if now.hour == i[0].hour and now.minute == i[0].minute:
+        start = datetime.datetime.strptime(lesson["start_time"], '%Y-%m-%dT%H:%M:%S+00:00')
+        if now.hour == start.hour and now.minute == start.minute:
             notification.notify( 
             title = "ClassCharts", 
-            message=f'You have {i[1]} now', 
+            message=f'You have {lesson["subject_name"]} now', 
             timeout=5) 
     time.sleep(60)
