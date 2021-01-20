@@ -20,7 +20,8 @@ while True:
      ).text
     for lesson in json.loads(response)["data"]:
         now = datetime.datetime.now()
-        start = datetime.datetime.strptime(lesson["start_time"], '%Y-%m-%dT%H:%M:%S+00:00')
+        start = datetime.datetime.strptime(
+        lesson["start_time"], '%Y-%m-%dT%H:%M:%S+00:00')
         if now.hour == start.hour and now.minute == start.minute:
             notification.notify( 
             title = "ClassCharts", 
